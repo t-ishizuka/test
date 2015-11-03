@@ -1,6 +1,5 @@
 # coding: utf-8
-require "csv"
-
+#
 # Description:
 #   CSVのデータをもとにモデルから参照するときに1件づつ参照すると時間がかかる
 #   しかし、全件まとめてモデルのインスタンスを生成するとメモリ消費が不安
@@ -18,6 +17,8 @@ require "csv"
 #       row = rows.find_by_value(0, model.id)
 #     end
 #   end
+
+require "csv"
 
 class ActiveCSV < CSV
   class << self
