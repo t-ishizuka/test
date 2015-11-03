@@ -20,9 +20,11 @@ require "csv"
 #   end
 
 class ActiveCSV < CSV
+  DEFAULT_BATCH_SIZE = 20
+
   class << self
     def bulk_foreach(path, options = {})
-      batch_size = options.delete(:batch_size) || 20
+      batch_size = options.delete(:batch_size) || DEFAULT_BATCH_SIZE
       read(path, options).each_slice(batch_size) do |rows|
         yield(Rows.new(rows))
       end
