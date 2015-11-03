@@ -26,6 +26,9 @@ class ActiveCSV < CSV
   class << self
     def bulk_foreach(path, options = {})
       batch_size = options.delete(:batch_size) || DEFAULT_BATCH_SIZE
+      
+      # ファイル自体は一度全てオンメモリに読み込まれる点に注意
+      # 大きいファイルを扱うことも考えるならファイル自体を行単位で読み込むようにする
       read(path, options).each_slice(batch_size) do |rows|
         yield(Rows.new(rows))
       end
