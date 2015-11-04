@@ -38,8 +38,6 @@ class ActiveCSV < CSV
   class Rows
     include Enumerable
 
-    attr_reader :rows
-
     def initialize(rows)
       @rows = rows
     end
@@ -53,15 +51,15 @@ class ActiveCSV < CSV
     end
 
     def values(column_num)
-      rows.map { |row| row[column_num] }
+      @rows.map { |row| row[column_num] }
     end
 
     def find_by_value(column_num, value)
-      rows.find { |row| row[column_num] == value } || []
+      @rows.find { |row| row[column_num] == value } || []
     end
 
     def size
-      rows.size
+      @rows.size
     end
   end
 end
